@@ -1,13 +1,388 @@
 <!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/fav-icon.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Gabriel Felix | Software Developer</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
-  </body>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Gabriel Felix — Desenvolvedor & Pesquisador</title>
+  <meta name="description" content="Gabriel Felix (Gabriel Morais Felix): estudante de Sistemas de Informação na Unicamp, sócio da Profit e pesquisador de IA aplicada à Engenharia de Requisitos com bolsa do CNPq.">
+  <meta property="og:title" content="Gabriel Felix — Desenvolvedor & Pesquisador">
+  <meta property="og:description" content="Código, interfaces e pesquisa. Unicamp, CNPq e Profit.">
+  <!-- IMAGEM: assets/images/og/og-cover.png (1200x630) -->
+  <meta property="og:image" content="assets/images/og/og-cover.png">
+  <link rel="icon" href="assets/images/logo/favicon.svg" type="image/svg+xml">
+
+  <script>
+    (function () {
+      var t;
+      try { t = localStorage.getItem('gf-theme'); } catch (e) {}
+      document.documentElement.setAttribute('data-theme', t || 'light');
+      document.documentElement.classList.add('js');
+    })();
+  </script>
+
+  <!-- Bricolage Grotesque (títulos e texto), Caveat (anotações à mão), JetBrains Mono (rótulos) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,300..800&family=Caveat:wght@500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+  <link rel="stylesheet" href="css/style.css?v=7">
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.min.js",
+        "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/"
+      }
+    }
+  </script>
+</head>
+<body>
+
+  <header class="header" id="header">
+    <a href="#inicio" class="logo" aria-label="Início">Gabriel F.</a>
+
+    <nav class="nav" aria-label="Principal">
+      <a href="#inicio" class="is-active">Início</a>
+      <a href="#projetos">Projetos</a>
+      <a href="#trajetoria">Trajetória</a>
+      <a href="#contato">Contato</a>
+      <!-- Círculo desenhado à mão que marca a seção atual -->
+      <svg class="nav__circle" id="navCircle" viewBox="0 0 120 50" aria-hidden="true" preserveAspectRatio="none">
+        <path d="M62 4C30 2 6 10 4 24c-2 14 26 22 58 21 32-1 56-9 54-23C114 9 88 3 52 6"/>
+      </svg>
+    </nav>
+
+    <div class="header__actions">
+      <button class="theme-btn" id="themeToggle" aria-label="Alternar tema claro/escuro">
+        <svg class="i-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 14.5A8.5 8.5 0 1 1 9.5 3.5a7 7 0 0 0 11 11z"/></svg>
+        <svg class="i-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.5"/><path d="M12 1.5v3M12 19.5v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M1.5 12h3M19.5 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"/></svg>
+      </button>
+      <a href="#contato" class="box-btn">Vamos conversar <span aria-hidden="true">↗</span></a>
+      <button class="burger" id="burger" aria-label="Abrir menu" aria-expanded="false" aria-controls="mobileMenu"><span></span><span></span></button>
+    </div>
+  </header>
+
+  <div class="mobile-menu" id="mobileMenu" hidden>
+    <nav aria-label="Menu mobile">
+      <a href="#inicio">Início</a>
+      <a href="#projetos">Projetos</a>
+      <a href="#trajetoria">Trajetória</a>
+      <a href="#contato">Contato</a>
+    </nav>
+  </div>
+
+  <main class="frame">
+
+    <!-- ============ HERO ============ -->
+    <section class="hero" id="inicio">
+      <!-- Spray azul granulado; o maior acompanha o mouse devagar -->
+      <div class="spray spray--hero" id="spray" aria-hidden="true"></div>
+
+      <div class="hero__top">
+        <h1 class="hero__title">
+          <span class="line"><span>Código,</span></span>
+          <span class="line line--blue"><span>interfaces</span></span>
+          <span class="line"><span>&amp; pesquisa</span> <svg class="sparkle" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 0C12 8 16 12 24 12C16 12 12 16 12 24C12 16 8 12 0 12C8 12 12 8 12 0Z"/></svg></span>
+        </h1>
+        <a href="#contato" class="blue-btn">Vamos conversar <span aria-hidden="true">↗</span></a>
+      </div>
+
+      <!-- Avatar 3D (three.js): eu, de costas, programando. Código em js/avatar.js -->
+      <div class="hero__scene" id="heroScene" role="img" aria-label="Avatar 3D do Gabriel sentado de costas, programando num notebook">
+        <p class="scene-status mono" id="sceneStatus">carregando o avatar 3D…</p>
+        <!-- Carimbo escrito à mão -->
+        <svg class="stamp" id="stamp" viewBox="0 0 200 120" aria-hidden="true">
+          <ellipse cx="100" cy="60" rx="92" ry="52"/>
+          <path id="stampLine" d="M26 74 Q100 34 182 50" fill="none" stroke="none"/>
+          <text><textPath href="#stampLine">aberto a estágio</textPath></text>
+          <path class="stamp__under" d="M58 84 Q110 66 160 70"/>
+        </svg>
+        <svg class="sparkle sparkle--scene" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 0C12 8 16 12 24 12C16 12 12 16 12 24C12 16 8 12 0 12C8 12 12 8 12 0Z"/></svg>
+        <span class="note note--scene">eu, programando.<br>mexe o mouse ↗</span>
+      </div>
+
+      <div class="hero__intro">
+        <p class="hi">Oi, eu sou</p>
+        <h2 class="name">Gabriel Felix</h2>
+        <p class="intro">
+          Estudo Sistemas de Informação na <u>Unicamp</u>, faço Iniciação Científica com
+          <u>bolsa do CNPq</u> e sou um dos sócios da <u>Profit</u>. Antes, passei pouco mais
+          de um ano como desenvolvedor Flutter na <u>Atria Jr</u>. Moro em Limeira (SP).
+        </p>
+
+        <div class="follow">
+          <p class="mono">Me encontre</p>
+          <ul>
+            <li><a href="https://www.linkedin.com/in/gabriel-morais-felix-017152286/" target="_blank" rel="noopener" class="dot-link is-filled" title="LinkedIn" aria-label="LinkedIn"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" stroke="none" d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9.5h4V21H3zM9.5 9.5h3.8v1.6h.06c.53-1 1.83-2.06 3.77-2.06 4.03 0 4.77 2.65 4.77 6.1V21h-4v-5.2c0-1.24-.02-2.84-1.73-2.84-1.73 0-2 1.35-2 2.75V21h-4z"/></svg></a></li>
+            <li><a href="https://github.com/fgabrielmorais" target="_blank" rel="noopener" class="dot-link" title="GitHub" aria-label="GitHub"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" stroke="none" d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.45-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.61.07-.61 1 .07 1.53 1.03 1.53 1.03.9 1.52 2.34 1.08 2.91.83.09-.65.35-1.08.63-1.33-2.22-.25-4.55-1.11-4.55-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.64 0 0 .84-.27 2.75 1.02a9.58 9.58 0 0 1 5 0c1.91-1.29 2.75-1.02 2.75-1.02.55 1.37.2 2.39.1 2.64.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.68-4.57 4.93.36.31.68.92.68 1.85v2.74c0 .27.18.58.69.48A10 10 0 0 0 12 2z"/></svg></a></li>
+            <li><a href="mailto:fgabrielmorais05@gmail.com" class="dot-link" title="E-mail" aria-label="E-mail"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3.5 6.5L12 13l8.5-6.5"/></svg></a></li>
+            <li><a href="assets/docs/curriculo-gabriel-morais.pdf" download class="dot-link" title="Baixar currículo" aria-label="Baixar currículo"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h4"/></svg></a></li>
+          </ul>
+        </div>
+
+      </div>
+
+      <a href="#contato" class="badge" aria-label="Estou pronto para conversar">
+        <svg viewBox="-4 -4 108 108" aria-hidden="true"><path d="M95.0 50.0Q102.2 59.2 92.3 65.4Q95.9 76.5 84.5 78.9Q84.1 90.6 72.5 89.0Q68.1 99.8 57.8 94.3Q50.0 103.0 42.2 94.3Q31.9 99.8 27.5 89.0Q15.9 90.6 15.5 78.9Q4.1 76.5 7.7 65.4Q-2.2 59.2 5.0 50.0Q-2.2 40.8 7.7 34.6Q4.1 23.5 15.5 21.1Q15.9 9.4 27.5 11.0Q31.9 0.2 42.2 5.7Q50.0 -3.0 57.8 5.7Q68.1 0.2 72.5 11.0Q84.1 9.4 84.5 21.1Q95.9 23.5 92.3 34.6Q102.2 40.8 95.0 50.0Z"/></svg>
+        <span>Bora<br>conversar?<br>↗</span>
+      </a>
+    </section>
+
+    <!-- ============ O QUE EU FAÇO ============ -->
+    <section class="services" id="servicos">
+      <div class="spray spray--services" aria-hidden="true"></div>
+      <div class="sec-head">
+        <h2 class="sec-title">Onde eu<br>coloco a mão.</h2>
+        <a href="#projetos" class="small-btn">Ver projetos <span aria-hidden="true">↗</span></a>
+      </div>
+
+      <div class="cards">
+        <a href="#projetos" class="card card--1" data-open="agente-requisitos">
+          <svg class="card__icon" viewBox="0 0 32 32" aria-hidden="true"><rect x="3" y="5" width="26" height="19" rx="2"/><path d="M3 10h26M12 28h8M16 24v4"/></svg>
+          <h3>Front-end web</h3>
+          <p class="card__where">No PolarisAI e nos projetos da Profit</p>
+          <ul>
+            <li>React.js e Tailwind CSS</li>
+            <li>SvelteKit</li>
+            <li>A interface do PolarisAI: chat e requisitos ao vivo</li>
+          </ul>
+          <span class="arrow-circle" aria-hidden="true">↗</span>
+        </a>
+        <div class="card card--2">
+          <svg class="card__icon" viewBox="0 0 32 32" aria-hidden="true"><rect x="9" y="3" width="14" height="26" rx="3"/><path d="M14 25h4"/></svg>
+          <h3>Apps mobile</h3>
+          <p class="card__where">Desenvolvedor na Atria Jr, abr/2025 a jun/2026</p>
+          <ul>
+            <li>Flutter e Dart</li>
+            <li>Funcionalidades para os apps da empresa júnior</li>
+            <li>Rotina de Scrum e Kanban com o time</li>
+          </ul>
+        </div>
+        <a href="#projetos" class="card card--3" data-open="agente-requisitos">
+          <svg class="card__icon" viewBox="0 0 32 32" aria-hidden="true"><circle cx="8" cy="8" r="3"/><circle cx="24" cy="9" r="3"/><circle cx="16" cy="24" r="3"/><path d="M11 8.3l10 .5M9.4 10.7l5 10.6M22.6 11.7l-5.2 9.6"/></svg>
+          <h3>IA &amp; dados</h3>
+          <p class="card__where">No PolarisAI e na pesquisa de redes</p>
+          <ul>
+            <li>LLM APIs, RAG e engenharia de prompts</li>
+            <li>Python, pandas e igraph</li>
+            <li>Comunidades em grafos com Leiden</li>
+            <li>Requisitos pela ISO/IEC/IEEE 29148</li>
+          </ul>
+          <span class="arrow-circle" aria-hidden="true">↗</span>
+        </a>
+      </div>
+
+      <p class="also mono">
+        <span>também uso</span> Java · Spring Boot · MySQL · PostgreSQL · SQL Server · Git · MVC
+        <span>idiomas</span> português (nativo) · inglês (intermediário)
+      </p>
+    </section>
+
+    <!-- ============ PROJETOS ============ -->
+    <section class="projects" id="projetos">
+      <div class="sec-head">
+        <h2 class="sec-title">Projetos de<br>verdade <svg class="squiggle" viewBox="0 0 60 30" aria-hidden="true"><path d="M2 8c10 0 14 18 26 16S36 4 46 8s6 18 12 12"/></svg></h2>
+        <a href="https://github.com/fgabrielmorais" target="_blank" rel="noopener" class="small-btn">GitHub <span aria-hidden="true">↗</span></a>
+      </div>
+
+      <article class="project" data-project="profit">
+        <div class="project__text">
+          <p class="project__tag mono">Empresa · sócio</p>
+          <h3>Profit: a empresa que nasceu dos nossos hackathons.</h3>
+          <p>Sou um dos sócios, com quatro amigos. Fomos campeões do Hackathon WeHandle e destaque em oratória no Hack2L, com uma plataforma que treina equipes de cobrança em simulações por voz com IA. Hoje fazemos software e automações sob medida para empresas.</p>
+          <div class="project__actions">
+            <button class="arrow-circle arrow-circle--line" aria-label="Ler o estudo de caso">↗</button>
+            <a class="inline-link" href="https://profitsolucoes.vercel.app/" target="_blank" rel="noopener">Ver o site ↗</a>
+          </div>
+        </div>
+        <div class="project__media">
+          <img src="assets/images/siteProfit/01_inicio.jpg" alt="Página inicial do site da Profit" style="object-position: left top" loading="lazy">
+        </div>
+      </article>
+
+      <article class="project project--flip" data-project="agente-requisitos">
+        <div class="project__text">
+          <p class="project__tag mono">Pesquisa · CNPq · 2026, em andamento</p>
+          <h3>PolarisAI: um agente de IA que entrevista usuários para levantar requisitos.</h3>
+          <p>A minha Iniciação Científica. O agente conduz a entrevista e, a cada resposta, extrai requisitos com origem e prioridade.</p>
+          <button class="arrow-circle arrow-circle--line" aria-label="Ler o estudo de caso">↗</button>
+        </div>
+        <div class="project__media">
+          <img src="assets/images/projects/agente-requisitos/ICinterface02.png" alt="PolarisAI: entrevista com o usuário e requisitos extraídos ao vivo" style="object-position: left top" loading="lazy">
+        </div>
+      </article>
+
+      <article class="project" data-project="redes-complexas">
+        <div class="project__text">
+          <p class="project__tag mono">Pesquisa · FCA Unicamp · 2025</p>
+          <h3>O mapa da pesquisa em engenharia da FCA, como uma rede.</h3>
+          <p>Docentes e áreas modelados como grafo, com comunidades detectadas pelo algoritmo Leiden, para apontar onde vale investir. O trabalho virou pôster num congresso da Unicamp.</p>
+          <button class="arrow-circle arrow-circle--line" aria-label="Ler o estudo de caso">↗</button>
+        </div>
+        <div class="project__media">
+          <img src="assets/images/projects/redes-complexas/redes01.jpg" alt="Gabriel ao lado do pôster da pesquisa de redes complexas" style="object-position: center 22%" loading="lazy">
+        </div>
+      </article>
+
+      <article class="project project--flip" data-project="workshop-git">
+        <div class="project__text">
+          <p class="project__tag mono">Ensino · CDI · 2026</p>
+          <h3>Workshop de Git &amp; GitHub para calouros.</h3>
+          <p>Ministrado com o Rafael Suetsugu pela CDI. Escrevi também uma apostila do zero, para quem está começando ter onde consultar depois.</p>
+          <button class="arrow-circle arrow-circle--line" aria-label="Ler o estudo de caso">↗</button>
+        </div>
+        <div class="project__media">
+          <img src="assets/images/workshopCDI/WorkshopCDI03.jpeg" alt="Equipe do workshop de Git e GitHub da CDI em frente ao slide de abertura" style="object-position: center 40%" loading="lazy">
+        </div>
+      </article>
+
+      <article class="project" data-project="visita-tractian">
+        <div class="project__text">
+          <p class="project__tag mono">Comunidade · TRACTIAN · 2026</p>
+          <h3>46 estudantes da Unicamp dentro da TRACTIAN.</h3>
+          <p>Era para ser um convite para 5 pessoas. Cuidei da logística e dos patrocínios para levar o grupo até a sede da empresa, em São Paulo.</p>
+          <button class="arrow-circle arrow-circle--line" aria-label="Ler o estudo de caso">↗</button>
+        </div>
+        <div class="project__media">
+          <img src="assets/images/tractianPictures/tractianPicture03.jpg" alt="Gabriel na sede da TRACTIAN, em frente ao letreiro" style="object-position: center 62%" loading="lazy">
+        </div>
+      </article>
+
+    </section>
+
+    <!-- ============ TRAJETÓRIA ============ -->
+    <section class="journey" id="trajetoria">
+      <div class="sec-head">
+        <h2 class="sec-title">Como cheguei<br>até aqui.</h2>
+        <p class="note">em ordem, do mais<br>recente para trás ↓</p>
+      </div>
+
+      <div class="year">
+        <p class="year__num">2026</p>
+        <ol class="events">
+          <li class="event">
+            <span class="event__tag mono">pesquisa</span>
+            <div>
+              <h3>Aprovado na Iniciação Científica com bolsa do CNPq</h3>
+              <p>Uma ideia que eu vinha construindo, usar IA na Engenharia de Requisitos, virou pesquisa. Ela só saiu do papel porque os professores Plinio Vilela e Pedro Ivo Garcia Nunes acreditaram nela.</p>
+            </div>
+          </li>
+          <li class="event">
+            <span class="event__tag mono">empresa</span>
+            <div>
+              <h3>Sócio da Profit</h3>
+              <p>Com Felipe Terossi, Kenzo Osako, Arthur Miele e Hyago Sampaio. Começou nos hackathons: campeões do WeHandle em julho e destaque em oratória no Hack2L em agosto.</p>
+            </div>
+          </li>
+          <li class="event event--photo">
+            <span class="event__tag mono">comunidade</span>
+            <div>
+              <h3>Visita técnica à TRACTIAN</h3>
+              <p>Era para ser um convite para 5 pessoas e virou uma visita de 46 alunos da Unicamp à sede da empresa. Organizei com Hyago, Arthur, Kenzo e Rafael.</p>
+            </div>
+            <figure class="event__img">
+              <img src="assets/images/tractianPictures/tractianPicture.jpg" alt="Os organizadores da visita na sede da TRACTIAN" style="object-position: center 55%" loading="lazy">
+            </figure>
+          </li>
+          <li class="event event--photo">
+            <span class="event__tag mono">ensino</span>
+            <div>
+              <h3>Workshop de Git &amp; GitHub para calouros</h3>
+              <p>Ministrei com o Rafael Suetsugu, pela CDI. Depois escrevi uma apostila para quem está começando ter onde consultar. <a class="inline-link" href="assets/docs/apostila-git-github.pdf" download>Baixar a apostila ↓</a></p>
+            </div>
+            <figure class="event__img">
+              <img src="assets/images/workshopCDI/workshopCDI02.jpeg" alt="Gabriel apresentando o workshop de Git" style="object-position: center 30%" loading="lazy">
+            </figure>
+          </li>
+          <li class="event">
+            <span class="event__tag mono">negócios</span>
+            <div>
+              <h3>Desafio Unicamp, equipe Rumo ao IPO</h3>
+              <p>Um modelo de negócio a partir de uma tecnologia patenteada. Fomos a campo validar: uma conversa com um empresário do setor e um formulário para fundadores e CEOs.</p>
+            </div>
+          </li>
+        </ol>
+      </div>
+
+      <div class="year">
+        <p class="year__num">2025</p>
+        <ol class="events">
+          <li class="event">
+            <span class="event__tag mono">hackathon</span>
+            <div>
+              <h3>Hackathon da TRACTIAN</h3>
+              <p>A primeira aproximação com a empresa. No ano seguinte, voltamos para organizar a visita.</p>
+            </div>
+          </li>
+          <li class="event">
+            <span class="event__tag mono">pesquisa</span>
+            <div>
+              <h3>Primeira pesquisa: redes complexas na FCA</h3>
+              <p>Python, pandas, igraph e Leiden para mapear o ecossistema de pesquisa da engenharia.</p>
+            </div>
+          </li>
+          <li class="event">
+            <span class="event__tag mono">trabalho</span>
+            <div>
+              <h3>Desenvolvedor na Atria Jr <span class="when">abr/2025 a jun/2026</span></h3>
+              <p>Fui desenvolvedor mobile da empresa júnior: criei funcionalidades em Flutter e Dart para os aplicativos e assumi demandas de outras áreas quando o time precisou.</p>
+            </div>
+          </li>
+          <li class="event">
+            <span class="event__tag mono">começo</span>
+            <div>
+              <h3>Entrei em Sistemas de Informação na Unicamp</h3>
+              <p>Faculdade de Ciências Aplicadas, em Limeira.</p>
+            </div>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ============ CONTATO ============ -->
+    <section class="contact" id="contato">
+      <div class="spray spray--contact" aria-hidden="true"></div>
+      <p class="note">procurando estágio em 2026 ↓</p>
+      <h2 class="contact__title">Vamos <span class="blue">conversar?</span></h2>
+      <p class="contact__text">O caminho mais direto é o e-mail, mas também estou no LinkedIn.</p>
+
+      <div class="contact__row">
+        <button class="copy" id="copyEmail" data-email="fgabrielmorais05@gmail.com">
+          <svg class="ico copy__mail" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3.5 6.5L12 13l8.5-6.5"/></svg><span class="copy__text">fgabrielmorais05@gmail.com</span>
+          <span class="copy__icon" aria-hidden="true">
+            <svg class="i-copy" viewBox="0 0 24 24"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"/></svg>
+            <svg class="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>
+          </span>
+        </button>
+        <a href="https://www.linkedin.com/in/gabriel-morais-felix-017152286/" target="_blank" rel="noopener" class="box-btn"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" stroke="none" d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9.5h4V21H3zM9.5 9.5h3.8v1.6h.06c.53-1 1.83-2.06 3.77-2.06 4.03 0 4.77 2.65 4.77 6.1V21h-4v-5.2c0-1.24-.02-2.84-1.73-2.84-1.73 0-2 1.35-2 2.75V21h-4z"/></svg>LinkedIn <span aria-hidden="true">↗</span></a>
+        <a href="https://github.com/fgabrielmorais" target="_blank" rel="noopener" class="box-btn"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" stroke="none" d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.45-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.61.07-.61 1 .07 1.53 1.03 1.53 1.03.9 1.52 2.34 1.08 2.91.83.09-.65.35-1.08.63-1.33-2.22-.25-4.55-1.11-4.55-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.64 0 0 .84-.27 2.75 1.02a9.58 9.58 0 0 1 5 0c1.91-1.29 2.75-1.02 2.75-1.02.55 1.37.2 2.39.1 2.64.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.68-4.57 4.93.36.31.68.92.68 1.85v2.74c0 .27.18.58.69.48A10 10 0 0 0 12 2z"/></svg>GitHub <span aria-hidden="true">↗</span></a>
+        <a href="assets/docs/curriculo-gabriel-morais.pdf" download class="box-btn"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h4"/></svg>Currículo (PDF) <span aria-hidden="true">↓</span></a>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <span>© 2026 Gabriel Felix</span>
+      <span class="mono">Feito à mão em HTML, CSS e JS · three.js · GSAP · Motion · Animate.css</span>
+      <a href="#inicio">Voltar ao topo ↑</a>
+    </footer>
+  </main>
+
+  <dialog class="modal" id="projectModal" aria-labelledby="modalTitle">
+    <div class="modal__panel">
+      <button class="modal__close" id="modalClose" aria-label="Fechar">
+        <svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
+      <div class="modal__content" id="modalContent"></div>
+    </div>
+  </dialog>
+
+  <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/motion@11.11.13/dist/motion.js"></script>
+  <script src="js/projects.js?v=7"></script>
+  <script src="js/main.js?v=7"></script>
+  <script type="module" src="js/avatar.js?v=7"></script>
+</body>
 </html>
